@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="utf-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+  <head>
+	<style>
+	 .translit {
+	   display:flex;
+	   justify-content: space-around;
+	   height: 90vh;
+	   flex-direction:column;
+	 }
+	 textarea {
+	   padding: 10px;
+	 }
+	 .translit-fields {
+	   display:flex;
+	   flex-direction:row;
+	   justify-content:space-around;
+	 }
+	 .translate-buttons {
+	   display: flex;
+	   justify-content: space-around;
+	 }
 
+	</style>
+  </head>
+  <body>
+	<main>
+	  <section>
+		<h2 style="text-align:center"> Udi <=> Caucausian Albanian </h2>
+		<div class="translit">
+		  <div class="translit-fields">
+			<div>
+			  <h4 style="text-align:center"> udi text </h4>
+			  <textarea id="left-text-input" rows="20" cols="50">
+
+			  </textarea>
+			</div>
+
+			<div>
+			  <h4 style="text-align:center"> Albanian text </h4>
+			  <textarea id="right-text-input" rows="20" cols="50">
+
+			  </textarea>
+			</div>
+		  </div>
+		  <div class="translate-buttons">
+			<input
+			  type="button"
+			  value="udi-to-albanian"
+			  onClick="doTranslate('udi-to-albanian')"/>
+			<input
+			  type="button"
+			  value="albanian-to-udi"
+			  onClick="doTranslate('albanian-to-udi')"/>
+		  </div>
+		</div>
+
+	  </section>
+	</main>
+    <script src="translit.js"></script>
+  </body>
+</html>
