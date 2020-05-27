@@ -119,7 +119,7 @@ const doTranslate = direction => {
   switch (direction) {
     case U_TO_A:
       handle = document.querySelector(LEFT_TEXT_ID);
-      for (const c of handle.value) {
+      for (const c of handle.value.toUpperCase()) {
         if (TABLE_T_TO_A.has(c)) {
           new_payload += TABLE_T_TO_A.get(c);
         } else {
@@ -131,7 +131,7 @@ const doTranslate = direction => {
       break;
     case A_TO_U:
       handle = document.querySelector(RIGHT_TEXT_ID);
-      for (const c of handle.value) {
+      for (const c of handle.value.toUpperCase()) {
         if (TABLE_A_TO_T.has(c)) {
           new_payload += TABLE_A_TO_T.get(c);
         } else {
