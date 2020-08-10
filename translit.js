@@ -1,4 +1,4 @@
-const TABLE_T_TO_A = new Map(
+const latinToAlbanianDataset = new Map(
   Object.entries({
     A: '𐔰',
     Ǎ: '𐕈',
@@ -55,7 +55,7 @@ const TABLE_T_TO_A = new Map(
   })
 );
 
-const TABLE_A_TO_T = new Map(
+const albanianToLatinDataset = new Map(
   Object.entries({
     '𐔰': 'A',
     '𐕈': 'Ǎ',
@@ -105,41 +105,138 @@ const TABLE_A_TO_T = new Map(
   })
 );
 
-const LEFT_TEXT_ID = '#left-text-input';
+const pronunciationDataset = new Map(
+  Object.entries({
+    '𐔰': 'A',
+    '𐔱': 'B',
+    '𐔲': 'G',
+    '𐔳': 'D',
+    '𐔴': 'E',
+    '𐔵': 'Z',
+    '𐔶': 'Ē',
+    '𐔷': 'Ž',
+    '𐔸': 'T',
+    '𐔹': 'Ć̣',
+    '𐔺': 'Y',
+    '𐔻': 'Ź',
+    '𐔼': 'I',
+    '𐔽': 'ʕ',
+    '𐔾': 'L',
+    '𐔿': 'Ń',
+    '𐕀': 'X',
+    '𐕁': 'D’',
+    '𐕂': 'C̣',
+    '𐕃': 'Ʒ́',
+    '𐕄': 'Ḳ',
+    '𐕅': 'L’',
+    '𐕆': 'H',
+    '𐕇': 'X̣',
+    '𐕈': 'Å',
+    '𐕉': 'Ć',
+    '𐕊': 'Č̣',
+    '𐕋': 'Č’',
+    '𐕌': 'M',
+    '𐕍': 'Q̇',
+    '𐕎': 'N',
+    '𐕏': 'Ʒ’',
+    '𐕐': 'Š',
+    '𐕑': 'Ǯ',
+    '𐕒': 'O',
+    '𐕓': 'Ṭ’',
+    '𐕔': 'F',
+    '𐕕': 'Ʒ',
+    '𐕖': 'Č',
+    '𐕗': 'Ṗ',
+    '𐕘': 'Ġ',
+    '𐕙': 'R',
+    '𐕚': 'S',
+    '𐕛': 'V',
+    '𐕜': 'Ṭ',
+    '𐕝': 'Ś',
+    '𐕞': 'Ü',
+    '𐕟': 'C̣’',
+    '𐕠': 'C',
+    '𐕡': 'W',
+    '𐕢': 'P',
+    '𐕣': 'K',
+    '𐕒𐕡': 'OWN',
+  })
+);
 
-const RIGHT_TEXT_ID = '#right-text-input';
 
-const U_TO_A = 'udi-to-albanian';
+const leftTextBoxId = '#left-text-input';
+const rightTextBoxId = '#right-text-input';
+const pronunciationTextId = '#pronunciation-text';
+const latinToAlbanian = 'latin-to-albanian';
+const albanianToLatin = 'albanian-to-latin';
 
-const A_TO_U = 'albanian-to-udi';
+
+function generatePronunciation(letters) {
+  let pronunciationTextElement = document.querySelector(pronunciationTextId);
+  let pronunciation = '';
+
+  for (let i = 0; i < letters.length; i++) {
+    const letter = letters[i];
+
+    if (pronunciationDataset.get(letter) != undefined) {
+      pronunciation += pronunciationDataset.get(letter);
+    } else {
+      pronunciation += letter;
+    }
+  }
+
+  pronunciationTextElement.innerHTML = "[" + pronunciation + "]";
+}
 
 const doTranslate = direction => {
   let handle = null;
-  let new_payload = '';
+  let translit = '';
+  let lettersArray = [];
+
   switch (direction) {
-    case U_TO_A:
-      handle = document.querySelector(LEFT_TEXT_ID);
-      for (const c of handle.value.toUpperCase()) {
-        if (TABLE_T_TO_A.has(c)) {
-          new_payload += TABLE_T_TO_A.get(c);
+    case latinToAlbanian:
+      handle = document.querySelector(leftTextBoxId);
+      word = handle.value.toUpperCase();
+
+      for (const letter of word) {
+        if (latinToAlbanianDataset.has(letter)) {
+          translit += latinToAlbanianDataset.get(letter);
+
+          lettersArray.push(latinToAlbanianDataset.get(letter));
         } else {
-          new_payload += c;
+          translit += letter;
+
+          lettersArray.push(letter);
         }
       }
-      handle = document.querySelector(RIGHT_TEXT_ID);
-      handle.value = new_payload;
+
+      handle = document.querySelector(rightTextBoxId);
+      handle.value = translit;
+
+      // Generate word pronunciation
+      generatePronunciation(lettersArray);
+
       break;
-    case A_TO_U:
-      handle = document.querySelector(RIGHT_TEXT_ID);
-      for (const c of handle.value.toUpperCase()) {
-        if (TABLE_A_TO_T.has(c)) {
-          new_payload += TABLE_A_TO_T.get(c);
+    case albanianToLatin:
+      handle = document.querySelector(rightTextBoxId);
+      word = handle.value.toUpperCase();
+
+      for (const letter of word) {
+        console.log(letter);
+        if (albanianToLatinDataset.has(letter)) {
+          translit += albanianToLatinDataset.get(letter);
         } else {
-          new_payload += c;
+          translit += letter;
         }
+
+        lettersArray.push(letter);
       }
-      handle = document.querySelector(LEFT_TEXT_ID);
-      handle.value = new_payload;
+
+      handle = document.querySelector(leftTextBoxId);
+      handle.value = translit;
+
+      // Generate word pronunciation
+      generatePronunciation(lettersArray);
       break;
     default:
       console.error(`Unknown direction for translate: ${direction}`);
