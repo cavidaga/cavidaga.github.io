@@ -222,7 +222,6 @@ const doTranslate = direction => {
       word = handle.value.toUpperCase();
 
       for (const letter of word) {
-        console.log(letter);
         if (albanianToLatinDataset.has(letter)) {
           translit += albanianToLatinDataset.get(letter);
         } else {
