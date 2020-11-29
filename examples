@@ -6,3 +6,61 @@ mezaizowńa | [mezaizowznʲa] | 𐕌𐔴𐔵𐔰𐔼𐔵𐕒𐕡𐔵𐔿𐔰
 lowḳas | [lowk’as] | 𐔾𐕒𐕡𐕄𐔰𐕚
 ḳod’ | [k’odʲ] | 𐕄𐕒𐕁
 l’aq̇ | [lʲaqˈ] | 𐕅𐔰𐕍
+
+--------------------------------------------------------------------------------------
+To replace ’ mark with ', use double quotes "" (e.g. 'l’' -> "l'").
+
+Simple if loop to search if the letter on the right is followed by ’ or any diacritical mark. If yes, combine both characters and search for the corresponding Caucasian Albanian character.
+
+
+#### if, else loop:
+e.g.
+if d is followed by ’, then search for the combined two characters,
+else search for d alone.
+
+# For the ’ mark:
+d’ -> d
+ṭ’ -> ṭ
+l’ -> l
+ʒ’ -> ʒ
+č’ -> č
+
+# For the dot below mark:
+x̣ -> x
+ć̣ -> ć
+č̣ -> č
+
+# For the accent mark:
+ʒ́ -> ʒ
+
+
+
+#### if, else if, else loop.
+e.g. 
+if c is followed by a dot below which is followed by ’, then search for the combined three characters,
+else if c if followed by a dot below and the third character is not ’, then search for the combined two letters,
+else search for c alone.
+
+# For the ’ and dot below marks:
+c̣ -> c
+c̣’ -> c
+
+------------------------------------------------------------------------
+Latında - Çıxan - Çıxmalı
+
+// working
+Ć̣araktar - 𐕉̣𐔰𐕙𐔰𐕣𐔸𐔰𐕙 - 𐔹𐔰𐕙𐔰𐕣𐔸𐔰𐕙
+N'amrod - 𐕎’𐔰𐕌𐕙𐕒𐔳 - 𐔿𐔰𐕌𐕙𐕒𐔳
+D'iakon - 𐔳’𐔼𐔰𐕣𐕒𐕎 - 𐕁𐔼𐔰𐕣𐕒𐕎
+C̣agma - 𐕠̣𐔰𐔲𐕌𐔰 - 𐕂𐔰𐔲𐕌𐔰
+ʒ́üḳal - 𐕕́𐕞𐕄𐔰𐔾 - 𐕃𐕞𐕄𐔰𐔾
+L'azar - 𐔾’𐔰𐔵𐔰𐕙 - 𐕅𐔰𐔵𐔰𐕙
+X̣achen - 𐕀̣𐔰𐕠𐕆𐔴𐕎 - 𐕇𐔰𐕠𐕆𐔴𐕎
+Č̣ig - 𐕖̣𐔼𐔲 - 𐕊𐔼𐔲
+C'axmux - 𐕠’𐔰𐕀𐕌u𐕀 - 𐕋𐔰𐕀𐕌u𐕀
+Q̇okesun - 𐕍̇𐕒𐕣𐔴𐕚u𐕎 - 𐕍𐕒𐕣𐔴𐕚u𐕎
+ʒ'agme - 𐕕’𐔰𐔲𐕌𐔴 - 𐕏𐔰𐔲𐕌𐔴
+Ṭ'aniel - 𐕜’𐔰𐕎𐔼𐔴𐔾 - 𐕓𐔰𐕎𐔼𐔴𐔾
+
+// not working
+C̣'abakesun - 𐕠̣’𐔰𐔱𐔰𐕣𐔴𐕚u𐕎 - 𐕟𐔰𐔱𐔰𐕣𐔴𐕚u𐕎

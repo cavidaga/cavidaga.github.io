@@ -5,7 +5,7 @@ const latinToAlbanianDataset = new Map(
     'p': '𐕢',
     'w': '𐕡',
     'c': '𐕠',
-    'c̣’': '𐕟',
+    "c̣'": '𐕟',
     'ü': '𐕞',
     'ś': '𐕝',
     'ṭ': '𐕜',
@@ -17,27 +17,27 @@ const latinToAlbanianDataset = new Map(
     'č': '𐕖',
     'ʒ': '𐕕',
     'f': '𐕔',
-    'ṭ’': '𐕓',
+    "ṭ'": '𐕓',
     'o': '𐕒',
     'ǯ': '𐕑',
     'š': '𐕐',
-    'ʒ’': '𐕏',
+    "ʒ'": '𐕏',
     'n': '𐕎',
     'q̇': '𐕍',
     'm': '𐕌',
-    'č’': '𐕋',
+    "č'": '𐕋',
     'č̣': '𐕊',
     'ć': '𐕉',
     'å': '𐕈',
     'x̣': '𐕇',
     'h': '𐕆',
-    'l’': '𐕅',
+    "l'": '𐕅',
     'ḳ': '𐕄',
-    'ʒ́’': '𐕃',
+    "ʒ́'": '𐕃',
     'c̣': '𐕂',
-    'd’': '𐕁',
+    "d'": '𐕁',
     'x': '𐕀',
-    'ń': '𐔿',
+    "n'": '𐔿',
     'l': '𐔾',
     'ʕ': '𐔽',
     'i': '𐔼',
@@ -53,6 +53,66 @@ const latinToAlbanianDataset = new Map(
     'g': '𐔲',
     'b': '𐔱',
     'a': '𐔰',
+    'OWN': '𐕒𐕡',
+    'K': '𐕣',
+    'P': '𐕢',
+    'W': '𐕡',
+    'C': '𐕠',
+    "C̣'": '𐕟',
+    'Ü': '𐕞',
+    'Ś': '𐕝',
+    'Ṭ': '𐕜',
+    'V': '𐕛',
+    'S': '𐕚',
+    'R': '𐕙',
+    'Ġ': '𐕘',
+    'Ṗ': '𐕗',
+    'Č': '𐕖',
+    'Ʒ': '𐕕',
+    'F': '𐕔',
+    "Ṭ'": '𐕓',
+    'O': '𐕒',
+    'Ǯ': '𐕑',
+    'Š': '𐕐',
+    "Ʒ'": '𐕏',
+    'N': '𐕎',
+    'Q̇': '𐕍',
+    'M': '𐕌',
+    "Č'": '𐕋',
+    'Č̣': '𐕊',
+    'Ć': '𐕉',
+    'Å': '𐕈',
+    'X̣': '𐕇',
+    'H': '𐕆',
+    "L'": '𐕅',
+    'Ḳ': '𐕄',
+    "Ʒ́'": '𐕃',
+    'C̣': '𐕂',
+    "D'": '𐕁',
+    'X': '𐕀',
+    "N'": '𐔿',
+    'L': '𐔾',
+    'ʕ': '𐔽',
+    'I': '𐔼',
+    'İ': '𐔼',
+    'Ź': '𐔻',
+    'Y': '𐔺',
+    'Ć̣': '𐔹',
+    'T': '𐔸',
+    'Ž': '𐔷',
+    'Ē': '𐔶',
+    'Z': '𐔵',
+    'E': '𐔴',
+    'D': '𐔳',
+    'G': '𐔲',
+    'B': '𐔱',
+    'A': '𐔰',
+    "Ṭ'": "𐕓",
+    "D'": "𐕁",
+    "N'": "𐔿",
+    "C'": "𐕋",
+    "ʒ́": "𐕃",
+    "C̣'": "𐕟"
   })
 );
 
@@ -73,7 +133,7 @@ const albanianToLatinDataset = new Map(
     '𐔼': 'i',
     '𐔽': 'ʕ',
     '𐔾': 'l',
-    '𐔿': 'ń',
+    '𐔿': 'n’',
     '𐕀': 'x',
     '𐕁': 'd’',
     '𐕂': 'c̣',
@@ -110,7 +170,7 @@ const albanianToLatinDataset = new Map(
     '𐕡': 'w',
     '𐕢': 'p',
     '𐕣': 'k',
-    '𐕒𐕡': 'own',
+    '𐕒𐕡': 'own'
   })
 );
 
@@ -178,14 +238,16 @@ const rightTextBoxId = '#right-text-input';
 const pronunciationTextId = '#pronunciation-text';
 const latinToAlbanian = 'latin-to-albanian';
 const albanianToLatin = 'albanian-to-latin';
-
+const unicodeCharacters = ["\u0300", "\u0301", "\u0307", "\u030D", "\u030E",
+  "\u0312", "\u0313", "\u0314", "\u0315", "\u0316",
+  "\u0317", "\u0323", "\u2019", "\u0027", "'"];
 
 function generatePronunciation(letters) {
   let pronunciationTextElement = document.querySelector(pronunciationTextId);
   let pronunciation = '';
 
   for (let i = 0; i < letters.length; i++) {
-    const letter = letters[i];
+    let letter = letters[i];
 
     if (pronunciationDataset.get(letter) != undefined) {
       pronunciation += pronunciationDataset.get(letter);
@@ -205,14 +267,33 @@ const doTranslate = direction => {
   switch (direction) {
     case latinToAlbanian:
       handle = document.querySelector(leftTextBoxId);
-      word = handle.value.toLowerCase();
+      word = handle.value;
 
-      for (const letter of word) {
+      console.log("Word length: " + word.length);
+
+      for (let index = 0; index < word.length; index++) {
+        let letter = word[index];
+
+        if (undefined != word[index + 1] && unicodeCharacters.includes(word[index + 1])) {
+          letter = word[index] + word[index + 1];
+          index += 1;
+        }
+
+        if (undefined != word[index + 2] && unicodeCharacters.includes(word[index + 2])) {
+          letter = word[index] + word[index + 2];
+          index += 1;
+        }
+
+        if (undefined != word[index + 3] && unicodeCharacters.includes(word[index + 3])) {
+          letter = word[index] + word[index + 3];
+          index += 1;
+        }
 
         if (latinToAlbanianDataset.has(letter)) {
-          translit += latinToAlbanianDataset.get(letter);
+          foundLetter = latinToAlbanianDataset.get(letter);
+          translit += foundLetter;
 
-          lettersArray.push(latinToAlbanianDataset.get(letter));
+          lettersArray.push(foundLetter);
         } else {
           translit += letter;
 
