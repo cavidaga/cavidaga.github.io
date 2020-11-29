@@ -275,18 +275,13 @@ const doTranslate = direction => {
         let letter = word[index];
 
         if (undefined != word[index + 1] && unicodeCharacters.includes(word[index + 1])) {
-          letter = word[index] + word[index + 1];
+          letter = letter + word[index + 1];
           index += 1;
-        }
-
-        if (undefined != word[index + 2] && unicodeCharacters.includes(word[index + 2])) {
-          letter = word[index] + word[index + 2];
-          index += 1;
-        }
-
-        if (undefined != word[index + 3] && unicodeCharacters.includes(word[index + 3])) {
-          letter = word[index] + word[index + 3];
-          index += 1;
+          // Second if loop to recognize c̣'
+          if (undefined != word[index + 1] && unicodeCharacters.includes(word[index + 1])) {
+            letter = letter + word[index + 1];
+            index += 1;
+          }
         }
 
         if (latinToAlbanianDataset.has(letter)) {
