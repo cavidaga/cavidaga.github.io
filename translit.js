@@ -163,7 +163,7 @@ const albanianToLatinDataset = new Map(
     '𐕡': 'w',
     '𐕢': 'p',
     '𐕣': 'k',
-    '𐕒𐕡': 'own'
+    '𐕒𐕡': 'ow'
   })
 );
 
@@ -221,7 +221,7 @@ const pronunciationDataset = new Map(
     '𐕡': 'w',
     '𐕢': 'p',
     '𐕣': 'k',
-    '𐕒𐕡': 'own',
+    '𐕒𐕡': 'ow',
   })
 );
 
