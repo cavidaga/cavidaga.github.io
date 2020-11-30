@@ -39,7 +39,6 @@ const latinToAlbanianDataset = new Map(
     'x': '𐕀',
     "n'": '𐔿',
     'l': '𐔾',
-    'ʕ': '𐔽',
     'i': '𐔼',
     'ź': '𐔻',
     'y': '𐔺',
